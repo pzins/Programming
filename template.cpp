@@ -67,35 +67,6 @@ void primeFactors(vector<int>& v, int n)
     if (n > 2) v.push_back(n);
 }
 
-int max_subarray_sum(const vector<int>& v)
-{
-    int res = 0;
-    for(int i = 0; i < v.size(); i++)
-    {
-        int sum = 0;
-        for(int j = i; j < v.size(); j++)
-        {
-            sum += v[j];
-            res = max(res, sum);
-        }
-    }
-    return res;
-}
-
-void search_subset(int k, int n, vector<int>& subset, vector<vector<int>>& res)
-{
-    if(k == n+1)
-    {
-        res.push_back(subset);
-    }
-    else
-    {   
-        subset.push_back(k);
-        search_subset(k+1, n, subset, res);
-        subset.pop_back();
-        search_subset(k+1, n, subset, res);
-    }
-}
 
 
 
