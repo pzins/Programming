@@ -67,10 +67,8 @@ void primeFactors(vector<int>& v, int n)
     if (n > 2) v.push_back(n);
 }
 
-// vector<pair<int, int>> v;
-// sort(v.begin(), v.end(), [](auto const& a, auto const& b) {
-//     return a.second > b.second;
-// });
+
+
 
 
 int main()
@@ -81,10 +79,18 @@ int main()
 	cin >> tt;
 	F(tti, tt)
     {
-
-
-
-
+        int n;
+        cin >> n;
+        int k = 2;
+        while(true)
+        {
+            if(n % int((pow(2, k) - 1)) == 0)
+            {
+                break;
+            }
+            k++;
+        }
+        cout << int(n / (pow(2, k) - 1)) << endl;
     }
     return 0;
 }

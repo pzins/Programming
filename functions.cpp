@@ -188,8 +188,24 @@ void search_subset(int k, int n, vector<int>& subset, vector<vector<int>>& res)
 }
 
 
+// vector<pair<int, int>> v;
+// sort(v.begin(), v.end(), [](auto const& a, auto const& b) {
+//     return a.second > b.second;
+// });
 
 
+
+struct mystruct
+{
+    int somme;
+    int freq;
+};
+
+
+bool comp(const mystruct &a, const mystruct &b)
+{
+    return a.freq > b.freq;
+}
 
 int main()
 {

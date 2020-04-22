@@ -67,11 +67,18 @@ void primeFactors(vector<int>& v, int n)
     if (n > 2) v.push_back(n);
 }
 
-// vector<pair<int, int>> v;
-// sort(v.begin(), v.end(), [](auto const& a, auto const& b) {
-//     return a.second > b.second;
-// });
 
+struct mystruct
+{
+    int somme;
+    int freq;
+};
+
+
+bool comp(const mystruct &a, const mystruct &b)
+{
+    return a.freq > b.freq;
+}
 
 int main()
 {
@@ -81,10 +88,65 @@ int main()
 	cin >> tt;
 	F(tti, tt)
     {
+        int n, k;
+        cin >> n >> k;
+        vi v(n, 0);
+        F(i, n) cin >> v[i];
 
-
-
-
+        map<int, int> m;
+        vector<mystruct> arr;
+        F(i, n/2)
+        {
+            int som = v[i] + v[n-1-i];
+            if(m.find(som) == m.end())
+            {
+                m[som] = 1;
+            }
+            else
+            {
+                m[som]++;
+            }
+        }
+        for(auto& a : m)
+        {
+            mystruct tmp;
+            tmp.somme = a.first;
+            tmp.freq = a.second;
+            arr.push_back(tmp);
+        }
+        sort(arr.begin(), arr.end(), comp);
+        // for(auto& a : arr)
+        // {
+        //     cout << "##   " << a.somme << " " << a.freq << endl;
+        // }
+        int res = n/2;
+        F(i, arr.size())
+        {
+            int tmp = 0;
+            bool cont = false;
+            F(j, n/2)
+            {
+                int s = v[j] + v[n-1-j];
+                if(s == arr[i].somme)
+                {
+                    continue;
+                }
+                else if( (arr[i].somme <= v[j] && arr[i].somme <= v[n-1-j]) || 
+                         ( arr[i].somme > v[j]+k && arr[i].somme > v[n-1-j]+k))
+                {
+                    tmp += 2;
+                    cont = true;
+                }
+                else
+                {
+                    tmp++;
+                }
+            }
+            res = min(res, tmp);
+            if(!cont) break;
+        }
+        
+        cout << res << endl;
     }
     return 0;
 }
