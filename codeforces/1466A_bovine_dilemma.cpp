@@ -81,6 +81,21 @@ int main()
 	cin >> tt;
 	F(tti, tt)
     {
+        int n;
+        cin >> n;
+        vector<int> v(n, 0);
+        F(i, n) cin >> v[i];
+
+        set<float> s;
+        for(int i = 0; i < n-1; i++)
+        {
+            for(int j = i+1; j < n; ++j)
+            {
+                // cout << "    # " <<0.5*abs(v[i]-v[j])<<endl;
+                s.insert(0.5*abs(v[i]-v[j]));
+            }
+        }
+        cout << s.size() << endl;
 
 
 

@@ -81,6 +81,20 @@ int main()
 	cin >> tt;
 	F(tti, tt)
     {
+        int n;
+        cin >> n;
+        vector<int> v(n, 0);
+        F(i, n) cin >> v[i];
+        set<int> s;
+
+        for(int i = 0; i < v.size(); ++i)
+        {
+            if(s.find(v[i]) != s.end())
+                v[i]++;
+            s.insert(v[i]);
+        }
+
+        cout << s.size() << endl;
 
 
 

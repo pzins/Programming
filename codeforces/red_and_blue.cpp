@@ -98,114 +98,7 @@ void search_subset(int k, int n, vector<int>& subset, vector<vector<int>>& res)
 }
 
 
-int dfs(const vector<vector<int>>& g, vector<int>& dist, vector<int>& remove, 
-    int curr, int curr_dist)
-{
-    int tmp = 0;
-    if(dist[curr] == INF)
-    {
-        dist[curr] = curr_dist;
-        for(auto& a : g[curr])
-        {
-            if(dist[a] == INF)
-                tmp += dfs(g, dist, remove, a, curr_dist+1);
-        }
 
-    }
-    remove[curr] = tmp;
-    return tmp+1;
-}
-
-int bfs(const vector<vector<int>>& g, vector<int>& dist, int start, int end, 
-vector<int>& parent,
-vector<vector<int>>& children)
-{
-	// g is a list of neighbours for each node
-    // dist is assumed to be filled with INF
-    queue<int> q;
-    q.push(start);
-    queue<int> d;
-    d.push(0);
-    while (q.size() > 0)
-    {
-        auto x = q.front();
-        auto dd = d.front();
-        q.pop();
-        d.pop();
-
-        if (dist[x] == INF)
-        {
-            dist[x] = dd;
-            if (end == x)
-                break;
-
-            for (auto e: g[x]) {
-                if(dist[e] == INF)
-                {
-                    children[x].push_back(e);
-                    q.push(e);
-                    parent[e] = x;
-                    d.push(dd+1);
-                }
-            }
-        }
-    }
-    if (end >= 0 && end < dist.size())
-        return dist[end];
-    else
-        return -1;
-}
-
-
-int max_subarray_sum(const vector<int>& v)
-{
-    int res = 0;
-    for(int i = 0; i < v.size(); i++)
-    {
-        int sum = 0;
-        for(int j = i; j < v.size(); j++)
-        {
-            sum += v[j];
-            res = max(res, sum);
-        }
-    }
-    return res;
-}
-
-void search_subset(int k, int n, vector<int>& subset, vector<vector<int>>& res)
-{
-    if(k == n+1)
-    {
-        res.push_back(subset);
-    }
-    else
-    {   
-        subset.push_back(k);
-        search_subset(k+1, n, subset, res);
-        subset.pop_back();
-        search_subset(k+1, n, subset, res);
-    }
-}
-
-
-// vector<pair<int, int>> v;
-// sort(v.begin(), v.end(), [](auto const& a, auto const& b) {
-//     return a.second > b.second;
-// });
-
-
-
-struct mystruct
-{
-    int somme;
-    int freq;
-};
-
-
-bool comp(const mystruct &a, const mystruct &b)
-{
-    return a.freq > b.freq;
-}
 
 int main()
 {
@@ -215,6 +108,43 @@ int main()
 	cin >> tt;
 	F(tti, tt)
     {
+        int n;
+        cin >> n;
+        vector<int> a(n, 0);
+        for(int i = 0; i < n; ++i)
+            cin >> a.at(i);
+        int k;
+        cin >> k;
+        vector<int> b(k, 0);
+        for(int i = 0; i < k; ++i)
+            cin >> b.at(i);
+
+        vector<int> aa{a[0]};
+        vector<int> bb{b[0]};
+        int m = max(0, aa[0]);
+        int M = max(0, bb[0]);
+        for(int i = 1; i < a.size(); i++)
+        {
+            aa.push_back(aa[i-1]+a[i]);
+            if(aa[aa.size()-1] >= m)
+            {
+                m = aa[aa.size()-1];
+            }
+        }
+        for(int i = 1; i < b.size(); i++)
+        {
+            bb.push_back(bb[i-1]+b[i]);
+            if(bb[bb.size()-1] >= M)
+            {
+                M = bb[bb.size()-1];
+            }
+        }
+        
+        
+        cout << m+M << endl;
+
+
+        
 
 
 

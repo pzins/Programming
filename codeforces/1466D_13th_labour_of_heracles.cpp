@@ -81,10 +81,62 @@ int main()
 	cin >> tt;
 	F(tti, tt)
     {
+        ll n;
+        cin >> n;
+        ll tot = 0;
+        vector<ll> w(n, 0);
+        F(i, n) {
+            cin >> w[i];
+            tot += w[i];
+        }
+        vector<ll> res{tot};
+        vector<ll> neigh(n, 0);
+        F(i, n-1)
+        {
+            ll a, b;
+            cin >> a >> b;
+            neigh[a-1]++;
+            neigh[b-1]++;
+        }
+        vector<ll> sp(n, 0);
+        F(i, n)
+        {
+            sp[i] = neigh[i] - 1;
+        }
+        vector<int> id(n, 0);
+        F(i, n) id[i] = i;
+        sort(id.begin(), id.end(), [&w](int a, int b){return w[a]>w[b];});
+        
 
+
+        int k = 0;
+        for(ll i = 1; i < n-1; ++i)
+        {
+            while(k<id.size() && sp[id[k]] == 0)
+                k++;
+
+            
+            if(sp[id[k]] > 0)
+            {
+                sp[id[k]]--;
+                res.push_back(res.at(res.size()-1) + w[id[k]]);
+            }
+            else
+            {
+                res.push_back(res.at(res.size()-1));
+                
+            }
+            
+        }
+
+        for(auto a : res)
+        {
+            cout << a << " ";
+        }
+        cout << endl;
 
 
 
     }
     return 0;
-}
+}   

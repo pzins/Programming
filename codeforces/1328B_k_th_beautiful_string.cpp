@@ -81,9 +81,27 @@ int main()
 	cin >> tt;
 	F(tti, tt)
     {
+        int n, k;
+        cin >> n >> k;
 
+        int add = 1;
+        int cnt = 0;
+        int tmp = 0;
+        while(tmp < k)
+        {
+            tmp += add;
+            add++;
+            cnt++;
+        }
+        int pos = cnt - 1;
 
+        int pos2 = k - (tmp - (add-1) + 1);
 
+        string res(n, 'a');
+        res[n-2-pos] = 'b';
+        res[n-1-pos2] = 'b';
+
+        cout << res << endl;
 
     }
     return 0;

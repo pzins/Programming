@@ -67,10 +67,8 @@ void primeFactors(vector<int>& v, int n)
     if (n > 2) v.push_back(n);
 }
 
-// vector<pair<int, int>> v;
-// sort(v.begin(), v.end(), [](auto const& a, auto const& b) {
-//     return a.second > b.second;
-// });
+
+
 
 
 int main()
@@ -81,8 +79,36 @@ int main()
 	cin >> tt;
 	F(tti, tt)
     {
+        int n;
+        cin >> n;
+        vector<ll> v(n, 0);
+        F(i, n) cin >> v[i];
+        
+        int sign = -1;
+        int predsign = -1;
 
+        if(v[0] > 0) sign = 1;
+        else sign = -1;
+        predsign = sign;
+        ll res = 0;
+        ll tmp = v[0];
+        F(i, n)
+        {
+            int curr = v[i];
+            if(curr > 0) sign = 1;
+            else sign = -1;
 
+            if(sign != predsign)
+            {
+                predsign = sign;
+                res += tmp;
+                tmp = v[i];
+            }
+
+            tmp = max(tmp, v[i]);
+        }
+
+        cout << res + tmp << endl;
 
 
     }

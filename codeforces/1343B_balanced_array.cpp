@@ -67,10 +67,8 @@ void primeFactors(vector<int>& v, int n)
     if (n > 2) v.push_back(n);
 }
 
-// vector<pair<int, int>> v;
-// sort(v.begin(), v.end(), [](auto const& a, auto const& b) {
-//     return a.second > b.second;
-// });
+
+
 
 
 int main()
@@ -81,9 +79,27 @@ int main()
 	cin >> tt;
 	F(tti, tt)
     {
-
-
-
+        int n;
+        cin >> n;
+        int mid = n/2;
+        if(mid %2 == 1)
+        {
+            cout << "NO" << endl;
+        }
+        else
+        {
+            cout << "YES" << endl;
+            F(i, mid)
+            {
+                cout << (i+1) * 2 << " ";
+            }
+            F(i, mid-1)
+            {
+                cout << 1+i*2 << " ";
+            }
+            cout << 1+(mid-1)*2+mid << endl;
+        }
+        
 
     }
     return 0;
