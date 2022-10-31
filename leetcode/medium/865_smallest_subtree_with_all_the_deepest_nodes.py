@@ -38,6 +38,9 @@ class Solution:
     
     
     def subtreeWithAllDeepest(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+	self.data = []
+	self.result = []
+	self.result_node = []
         self.dfs(root, [root.val])
         if len(self.data) == 1:
             lca = self.data[0][len(self.data[0])-1]
