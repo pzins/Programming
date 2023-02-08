@@ -1,0 +1,19 @@
+class Solution {
+public:
+    long long dividePlayers(vector<int>& skill) {
+        if(skill.size() == 2) return skill[0] * skill[1];
+
+        sort(skill.begin(), skill.end());
+
+        long long tmp = -1;
+        long long total = 0;
+        for(int i = 0; i < skill.size()/2; ++i)
+        {
+            int tot = skill[i] + skill[skill.size()-1-i];
+            if(i == 0) tmp = tot;
+            else if(tmp != tot) return -1;
+            total += skill[i] * skill[skill.size()-1-i];
+        }
+        return total;
+    }
+};
